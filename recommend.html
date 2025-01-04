@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .book-card {
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 10px;
+        width: 80%;
+        height: 300px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .book-card img {
+        width: 100px;
+        height: 150px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+
+    .book-card h3 {
+        font-size: 1.5rem;
+        margin: 10px 0 5px;
+    }
+
+    .book-card p {
+        font-size: 1.2rem;
+        margin: 5px 0;
+    }
+
+    h1 {
+        font-size: 45px;
+        color: white;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .row {
+        margin: 20px;
+    }
+
+    .col-md-3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+</style>
+
+<body style="background-color:black">
+
+    <nav class="navbar" style="background-color: blue">
+        <a class="navbar-brand">My Book Recommender</a>
+        <ul class="nav navbar-nav" style="color: black;">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a>Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h1>Recommend Books</h1>
+                <form action="/recommend_books" method="post">
+                    <input name="user_input" class="form-control" placeholder="Enter book title" required><br>
+                    <input type="submit" class="btn btn-lg btn-warning" value="Submit">
+                </form>
+            </div>
+        </div>
+
+        {% if data %}
+        <div class="row">
+            {% for i in data %}
+            <div class="col-md-3">
+                <div class="book-card">
+                    <img src="{{i[2]}}" alt="Book Cover">
+                    <p class="text-white"><strong>{{i[0]}}</strong></p>
+                    <p class="text-white">{{i[1]}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
